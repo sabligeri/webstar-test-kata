@@ -8,6 +8,7 @@ public class TimeFormatter {
     private static final int SECONDS_IN_A_DAY = 24 * 60 * 60;
     private static final int SECONDS_IN_AN_HOUR = 60 * 60;
     private static final int SECONDS_IN_A_MINUTE = 60;
+    private static final int ONE_SECOND = 1;
 
     public static String formatDuration(int seconds) {
 
@@ -15,40 +16,23 @@ public class TimeFormatter {
             return "now";
         }
 
+        int[] inSeconds = new int[] {SECONDS_IN_A_YEAR, SECONDS_IN_A_DAY, SECONDS_IN_AN_HOUR, SECONDS_IN_A_MINUTE, ONE_SECOND};
+        String[] timeUnits = new String[] {"year", "day", "hour", "minute", "second"};
+
         List<String> resultFragments = new ArrayList<>();
 
-        int years = seconds / SECONDS_IN_A_YEAR;
-        if(years >= 1) {
-            resultFragments.add(years + (years == 1 ? " year" : " years"));
-            seconds = seconds % SECONDS_IN_A_YEAR;
-        }
-
-        int days = seconds / SECONDS_IN_A_DAY;
-        if(days >= 1) {
-            resultFragments.add(days + (days == 1 ? " day" : " days"));
-            seconds = seconds % SECONDS_IN_A_DAY;
-        }
-
-
-        int hours = seconds / SECONDS_IN_AN_HOUR;
-        if(hours >= 1) {
-            resultFragments.add(hours + (hours == 1 ? " hour" : " hours"));
-            seconds = seconds % SECONDS_IN_AN_HOUR;
-        }
-
-
-        int minutes = seconds / SECONDS_IN_A_MINUTE;
-        if(minutes >= 1) {
-            resultFragments.add(minutes + (minutes == 1 ? " minute" : " minutes"));
-            seconds = seconds % SECONDS_IN_A_MINUTE;
-        }
-
-        if(seconds >= 1) {
-            resultFragments.add(seconds + (seconds == 1 ? " second" : " seconds"));
+        for(int i = 0; i < timeUnits.length; i++) {
+            int secondsInUnit = inSeconds[i];
+            String  timeUnit = timeUnits[i];
+            int count = seconds / secondsInUnit;
+            if(count >= 1) {
+                resultFragments.add(count + " " + timeUnit + (count == 1 ? "" : "s"));
+            }
+            seconds = seconds % secondsInUnit;
         }
 
         if (resultFragments.size() == 1) {
-            return resultFragments.get(0);
+            return resultFragments.getFirst();
         }
 
         if (resultFragments.size() == 2) {
