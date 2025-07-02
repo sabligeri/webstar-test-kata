@@ -20,7 +20,7 @@ This project is based on the following Codewars kata: https://www.codewars.com/k
 | `refactor-timeformatter`          | 251,471              | 3,060          |
 | `parallel-arrays` (planned)    | –                | –            |
 | `nested-builder`  (planned)          | –                | –            |
-| `enum-map` (planned)        | –                | –            |
+| `enum-map`        | 163,948                | 2,240            |
 | `single-pass-string` (planned)           | –                | –            |
 
 > **Note:** this table is currently just a placeholder.  
